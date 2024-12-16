@@ -1,0 +1,77 @@
+class CountVisitors:
+ def __init__(self):
+   self.counter=0
+   self.limit=0
+
+
+ def increment_one(self):
+   if self.counter <self.limit:
+     self.counter +=1
+     print(f"Visitor added. Current visitors: {self.counter}")
+   else:
+     print("Limit reached. No more visitors can enter.")
+
+
+ def increment_by(self):
+   try:
+     number=int(input("How many visitors do you want to add? "))
+     if number <=0:
+       print("The number must be positive.")
+       return
+     if self.counter+number <=self.limit:
+       self.counter +=number
+       print(f"{number} visitors added. Current visitors: {self.counter}")
+     else:
+      print(f"can not add {number} visitors.")
+   except ValueError:
+     print("invalid input.")
+
+
+ def set_limit(self):
+   try:
+     limit=int(input("Set the visitors limit: "))
+     if limit<=0:
+       print("It must be positive.")
+       return
+     self.limit=limit
+     print(f"Visitor limit set to {self.limit}")
+   except ValueError:
+     print("invalid input.")
+
+
+ def is_next_allowed(self):
+   if self.counter<self.limit:
+     print("Next visitor is allowed.")
+     return True
+   else:
+     print("Next visitor is not allowed.")
+     return False
+
+
+ def places_left(self):
+   places=self.limit-self.counter
+   print(f"Places left: {places}")
+   return places
+
+
+ def undo_last_increment(self):
+   if self.counter >0:
+     self.counter-=1
+     print(f"Visitor removed. Current visitors: {self.counter}")
+   else:
+     print("No visitors to remove.")
+
+
+ def reset_counter(self):
+   self.counter=0
+   print("Visitor counter reset to 0.")
+
+
+museum=CountVisitors()
+museum.set_limit()
+museum.increment_by()
+museum.increment_one()
+museum.is_next_allowed()
+museum.places_left()
+museum.undo_last_increment()
+museum.reset_counter()
